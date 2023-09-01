@@ -1,24 +1,28 @@
-const drawingSpace = document.querySelector('.drawing-space')
+const drawingSpace = document.querySelector('.drawing-space');
+const colorPicker = document.querySelector('.colorPicker');
+const colorPickerButton = document.querySelector('.colorPickerButton');
+
+let color = 'black'
+console.log(color);
+
 
 
 let numPixels = 16;
 let size = 480 / numPixels;
 
 // grid size choice
-// color choice
 // erase choice 
+// back to color mode 
 // clear all choice
 // rainbow random color choice
 // touchscreen choice changes to computer once pressed 
 
 createGrid(numPixels);
 const pixels = document.querySelectorAll('.pixel');
-pixels.forEach(pixel => pixel.addEventListener('mouseover', getPixel));
+pixels.forEach(pixel => pixel.addEventListener('mousemove', getPixel));
 
 
-
-
-
+colorPicker.addEventListener("change", choseColor, false);
 
 
 
@@ -40,8 +44,8 @@ function createGrid (numPixels) {
 
 function getPixel(e) {
   let pixel = e.target;
-  console.log(pixel);
- 
+
+  draw(pixel, color);
   //if (erase button pressed) {
     //call erase function
   //} else if (color rainbow is presed) {
@@ -51,13 +55,15 @@ function getPixel(e) {
   
 }
 
-function draw(pixel, col='blue') {
+function draw(pixel, col=black) {
   pixel.setAttribute('style', `background-color: ${col}; height: ${size}px; width: ${size}px`);
 
 }
 function erase(pixel) {
   pixel.setAttribute('style', `background-color: white; height: ${size}px; width: ${size}px`);
-
-
 }
 
+function choseColor(e) {
+  console.log(e);
+  color = colorPicker.value
+}

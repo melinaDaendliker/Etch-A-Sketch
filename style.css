@@ -8,16 +8,13 @@ body{
 
 .drawing-space{
     display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: white;
     height: 480px;
     width: 480px;
 }
 
-.test{
-    height: 300px;
-    width: 200px;
-    background-color: pink;
-}
 
 .line{
     margin: 0;
