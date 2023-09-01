@@ -19,13 +19,6 @@ body{
     background-color: pink;
 }
 
-.pixel{
-    height: 30px;
-    width: 30px;
-}
-
 .line{
     margin: 0;
-    width: 30px;
-    height: 60px;
 }
