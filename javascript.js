@@ -25,27 +25,25 @@ drawButton.addEventListener('click', () => {mode = 'draw'});
 rainbowButton.addEventListener('click', () => {mode = 'rainbow'})
 colorPicker.addEventListener('change', choseColor, false);
 clearButton.addEventListener('click', (e) => {clear(pixels)});
-input.addEventListener('change', changeGridSize);
+input.addEventListener('change', (e) => {changeGridSize(e); console.log('test')});
 
 // event listener for drawing 
 pixels.forEach(pixel => pixel.addEventListener(`mousemove`, draw));
 
 // functions 
 
-function changeGridSize () {
-  input.addEventListener("input", (event) => {
+function changeGridSize (event) {
     value.textContent = event.target.value;
     let numPixels = event.target.value;
-    if (numPixels != 16) {
-      const lines = document.querySelectorAll('.line');
-      lines.forEach((line) => {line.remove(drawingSpace)
-      })
-      size = 480 / numPixels;
-      createGrid(numPixels);
-      pixels = document.querySelectorAll('.pixel');
-      pixels.forEach(pixel => pixel.addEventListener(`mouseover`, draw));
-    }
-  });
+    console.log(numPixels);
+    
+    const lines = document.querySelectorAll('.line');
+    lines.forEach((line) => {line.remove(drawingSpace)
+    })
+    size = 480 / numPixels;
+    createGrid(numPixels);
+    pixels = document.querySelectorAll('.pixel');
+    pixels.forEach(pixel => pixel.addEventListener(`mouseover`, draw));
 }
 
 function startDrawing(e) {
@@ -56,8 +54,6 @@ function startDrawing(e) {
 function stopDrawing() {
   isDrawing = false;
 }
-
-// make button that is in use other color 
 
 function createGrid (numPixels) {
   for (let i = 1; i <= numPixels ; i++) {
