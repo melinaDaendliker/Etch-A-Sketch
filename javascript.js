@@ -16,7 +16,7 @@ let numPixels = 16;
 let size = 480 / numPixels;
 createGrid(numPixels);
 const pixels = document.querySelectorAll('.pixel');
-mouseAction();
+pixels.forEach(pixel => pixel.addEventListener('mouseover', draw));
 
 
 
@@ -45,24 +45,6 @@ mouseAction();
 
 // clear all choice
 // rainbow random color choice
-// touchscreen choice changes to computer once pressed 
-function mouseAction() {
-  let isMouseDown = false;
-  pixels.forEach((pixel) => {
-    pixel.addEventListener('mousedown', () => {
-      isMouseDown = true;
-    });
-    pixel.addEventListener('mouseup', () => {
-    isMouseDown = false;
-    });
-    pixel.addEventListener('mousemove', (e) => {
-    if (isMouseDown) {
-      let drawPixel = e.target;
-      draw(drawPixel);
-    }
-    });
-  }); 
-}
 
 
 
@@ -91,12 +73,13 @@ function createGrid (numPixels) {
   }
 }
 
-function draw(pixel) {
+function draw(e) {
+  let pixel = e.target
   if (mode == 'draw') {
-    console.log(mode);
     coloring(pixel, color);
   } else if (mode == 'erase') {
     erase(pixel);
+  
     
   }
   
