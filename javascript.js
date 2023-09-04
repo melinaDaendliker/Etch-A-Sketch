@@ -3,11 +3,10 @@ const colorPicker = document.querySelector('.colorPicker');
 const colorPickerButton = document.querySelector('.colorPickerButton');
 
 let color = 'black'
-console.log(color);
 
 
 
-let numPixels = 16;
+let numPixels = 8;
 let size = 480 / numPixels;
 
 // grid size choice
@@ -18,11 +17,36 @@ let size = 480 / numPixels;
 // touchscreen choice changes to computer once pressed 
 
 createGrid(numPixels);
+let isMouseDown = false;
 const pixels = document.querySelectorAll('.pixel');
-pixels.forEach(pixel => pixel.addEventListener('mousemove', getPixel));
+
+pixels.forEach((pixel) => {
+  //console.log(pixel)
+  pixel.addEventListener('mousedown', () => {
+      isMouseDown = true;
+      console.log(isMouseDown);
+  });
+
+  pixel.addEventListener('mouseup', () => {
+    isMouseDown = false;
+    console.log(isMouseDown);
+});
+  pixel.addEventListener('mousemove', (e) => {
+    if (isMouseDown) {
+      let drawPixel = e.target;
+      draw(drawPixel);
+      //draw();
+    }
+});
+}); 
 
 
 colorPicker.addEventListener("change", choseColor, false);
+
+
+
+
+
 
 
 
@@ -42,20 +66,20 @@ function createGrid (numPixels) {
   }
 }
 
-function getPixel(e) {
-  let pixel = e.target;
+function draw(pixel) {
+  
 
-  draw(pixel, color);
+  coloring(pixel, color);
   //if (erase button pressed) {
     //call erase function
-  //} else if (color rainbow is presed) {
+  //} else if (color rainbow is pressed) {
     //call rainbow function
   //}
     //else call draw function default black if nothing else is chosen
   
 }
 
-function draw(pixel, col=black) {
+function coloring(pixel, col=black) {
   pixel.setAttribute('style', `background-color: ${col}; height: ${size}px; width: ${size}px`);
 
 }
@@ -63,7 +87,18 @@ function erase(pixel) {
   pixel.setAttribute('style', `background-color: white; height: ${size}px; width: ${size}px`);
 }
 
+function rainbow() {
+
+}
+
+function clear() {
+
+}
+
+function touch(){
+
+}
+
 function choseColor(e) {
-  console.log(e);
   color = colorPicker.value
 }
