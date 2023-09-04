@@ -5,15 +5,19 @@ const eraser = document.querySelector('.erase');
 const drawButton = document.querySelector('.draw');
 const clearButton = document.querySelector('.clear');
 const rainbowButton = document.querySelector('.rainbow');
-
+const touchButton = document.querySelector('.touch');
+const value = document.querySelector("#value");
+const input = document.querySelector("#size");
 
 // default values
+let isDrawing = false;
 let color = 'black';
 let mode = 'draw'
 let numPixels = 16; 
 let size = 480 / numPixels;
+value.textContent = input.value;
 createGrid(numPixels);
-const pixels = document.querySelectorAll('.pixel');
+let pixels = document.querySelectorAll('.pixel');
 
 // event listener for buttons
 eraser.addEventListener('click', () => { mode = 'erase'});
@@ -21,38 +25,39 @@ drawButton.addEventListener('click', () => {mode = 'draw'});
 rainbowButton.addEventListener('click', () => {mode = 'rainbow'})
 colorPicker.addEventListener('change', choseColor, false);
 clearButton.addEventListener('click', (e) => {clear(pixels)});
+input.addEventListener('change', changeGridSize);
 
 // event listener for drawing 
-pixels.forEach(pixel => pixel.addEventListener('mouseover', draw));
+pixels.forEach(pixel => pixel.addEventListener(`mousemove`, draw));
 
+// functions 
 
+function changeGridSize () {
+  input.addEventListener("input", (event) => {
+    value.textContent = event.target.value;
+    let numPixels = event.target.value;
+    if (numPixels != 16) {
+      const lines = document.querySelectorAll('.line');
+      lines.forEach((line) => {line.remove(drawingSpace)
+      })
+      size = 480 / numPixels;
+      createGrid(numPixels);
+      pixels = document.querySelectorAll('.pixel');
+      pixels.forEach(pixel => pixel.addEventListener(`mouseover`, draw));
+    }
+  });
+}
 
+function startDrawing(e) {
+  isDrawing = true;
+  draw(e);
+}
 
-//const value = document.querySelector("#value");
-//const input = document.querySelector("#pi_input");
-//value.textContent = input.value;
-//input.addEventListener("input", (event) => {
-  //value.textContent = event.target.value;
-  //let numPixels = event.target.value;
-  //if (numPixels != 16) {
-    //const lines = document.querySelectorAll('.line');
-    //lines.forEach((line) => {line.remove(drawingSpace)
-    //})
-    //console.log(numPixels);
-    //size = 480 / numPixels;
-    //createGrid(numPixels);
-  //}
-//});
+function stopDrawing() {
+  isDrawing = false;
+}
 
-
-
-
-
-// grid size choice
-// touch scree function 
-// rainbow random color choice
-
-
+// make button that is in use other color 
 
 function createGrid (numPixels) {
   for (let i = 1; i <= numPixels ; i++) {
@@ -78,6 +83,7 @@ function draw(e) {
   } else if (mode == 'rainbow') {
     rainbow(pixel);
   }
+
 }
 
 function coloring(pixel, col=black) {
@@ -97,23 +103,13 @@ function getRandomColor() {
   return color;
 }
 
-
-
 function rainbow(pixel) {
   let color = getRandomColor();
   pixel.setAttribute('style', `background-color: ${color}; height: ${size}px; width: ${size}px`);
-
-  
-
-
 }
 
 function clear(pixels) {
   pixels.forEach((pixel) => pixel.setAttribute('style', `background-color: white; height: ${size}px; width: ${size}px`));
-}
-
-function touch(){
-
 }
 
 function choseColor(e) {
