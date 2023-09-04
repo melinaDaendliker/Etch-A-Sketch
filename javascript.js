@@ -2,20 +2,25 @@ const drawingSpace = document.querySelector('.drawing-space');
 const colorPicker = document.querySelector('.colorPicker');
 const colorPickerButton = document.querySelector('.colorPickerButton');
 const eraser = document.querySelector('.erase');
-const drawButton = document.querySelector('.draw')
+const drawButton = document.querySelector('.draw');
+const clearButton = document.querySelector('.clear');
 
-// event listener for buttons
-let mode = 'draw'
-
-eraser.addEventListener('click', () => { mode = 'erase'});
-drawButton.addEventListener('click', () => {mode = 'draw'});
 
 // default values
 let color = 'black';
+let mode = 'draw'
 let numPixels = 16; 
 let size = 480 / numPixels;
 createGrid(numPixels);
 const pixels = document.querySelectorAll('.pixel');
+
+// event listener for buttons
+eraser.addEventListener('click', () => { mode = 'erase'});
+drawButton.addEventListener('click', () => {mode = 'draw'});
+colorPicker.addEventListener('change', choseColor, false);
+clearButton.addEventListener('click', (e) => {clear(pixels)});
+
+// event listener for drawing 
 pixels.forEach(pixel => pixel.addEventListener('mouseover', draw));
 
 
@@ -42,20 +47,8 @@ pixels.forEach(pixel => pixel.addEventListener('mouseover', draw));
 
 
 // grid size choice
-
-// clear all choice
 // rainbow random color choice
-
-
-
-colorPicker.addEventListener("change", choseColor, false);
-
-
-
-
-
-
-
+// touch scree function 
 
 
 function createGrid (numPixels) {
@@ -79,19 +72,9 @@ function draw(e) {
     coloring(pixel, color);
   } else if (mode == 'erase') {
     erase(pixel);
-  
-    
+  } else if (mode == 'rainbow') {
+    rainbow(pixel);
   }
-  
-
-
-  //if (erase button pressed) {
-    //call erase function
-  //} else if (color rainbow is pressed) {
-    //call rainbow function
-  //}
-    //else call draw function default black if nothing else is chosen
-  
 }
 
 function coloring(pixel, col=black) {
@@ -102,12 +85,12 @@ function erase(pixel) {
   pixel.setAttribute('style', `background-color: white; height: ${size}px; width: ${size}px`);
 }
 
-function rainbow() {
+function rainbow(pixel) {
 
 }
 
-function clear() {
-
+function clear(pixels) {
+  pixels.forEach((pixel) => pixel.setAttribute('style', `background-color: white; height: ${size}px; width: ${size}px`));
 }
 
 function touch(){
