@@ -1,44 +1,69 @@
 const drawingSpace = document.querySelector('.drawing-space');
 const colorPicker = document.querySelector('.colorPicker');
 const colorPickerButton = document.querySelector('.colorPickerButton');
+const eraser = document.querySelector('.erase');
+const drawButton = document.querySelector('.draw')
 
-let color = 'black'
+// event listener for buttons
+let mode = 'draw'
 
+eraser.addEventListener('click', () => { mode = 'erase'});
+drawButton.addEventListener('click', () => {mode = 'draw'});
 
-
-let numPixels = 8;
+// default values
+let color = 'black';
+let numPixels = 16; 
 let size = 480 / numPixels;
+createGrid(numPixels);
+const pixels = document.querySelectorAll('.pixel');
+mouseAction();
+
+
+
+
+//const value = document.querySelector("#value");
+//const input = document.querySelector("#pi_input");
+//value.textContent = input.value;
+//input.addEventListener("input", (event) => {
+  //value.textContent = event.target.value;
+  //let numPixels = event.target.value;
+  //if (numPixels != 16) {
+    //const lines = document.querySelectorAll('.line');
+    //lines.forEach((line) => {line.remove(drawingSpace)
+    //})
+    //console.log(numPixels);
+    //size = 480 / numPixels;
+    //createGrid(numPixels);
+  //}
+//});
+
+
+
+
 
 // grid size choice
-// erase choice 
-// back to color mode 
+
 // clear all choice
 // rainbow random color choice
 // touchscreen choice changes to computer once pressed 
-
-createGrid(numPixels);
-let isMouseDown = false;
-const pixels = document.querySelectorAll('.pixel');
-
-pixels.forEach((pixel) => {
-  //console.log(pixel)
-  pixel.addEventListener('mousedown', () => {
+function mouseAction() {
+  let isMouseDown = false;
+  pixels.forEach((pixel) => {
+    pixel.addEventListener('mousedown', () => {
       isMouseDown = true;
-      console.log(isMouseDown);
-  });
-
-  pixel.addEventListener('mouseup', () => {
+    });
+    pixel.addEventListener('mouseup', () => {
     isMouseDown = false;
-    console.log(isMouseDown);
-});
-  pixel.addEventListener('mousemove', (e) => {
+    });
+    pixel.addEventListener('mousemove', (e) => {
     if (isMouseDown) {
       let drawPixel = e.target;
       draw(drawPixel);
-      //draw();
     }
-});
-}); 
+    });
+  }); 
+}
+
 
 
 colorPicker.addEventListener("change", choseColor, false);
@@ -67,9 +92,16 @@ function createGrid (numPixels) {
 }
 
 function draw(pixel) {
+  if (mode == 'draw') {
+    console.log(mode);
+    coloring(pixel, color);
+  } else if (mode == 'erase') {
+    erase(pixel);
+    
+  }
   
 
-  coloring(pixel, color);
+
   //if (erase button pressed) {
     //call erase function
   //} else if (color rainbow is pressed) {
