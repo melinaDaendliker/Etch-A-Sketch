@@ -4,6 +4,7 @@ const colorPickerButton = document.querySelector('.colorPickerButton');
 const eraser = document.querySelector('.erase');
 const drawButton = document.querySelector('.draw');
 const clearButton = document.querySelector('.clear');
+const rainbowButton = document.querySelector('.rainbow');
 
 
 // default values
@@ -17,6 +18,7 @@ const pixels = document.querySelectorAll('.pixel');
 // event listener for buttons
 eraser.addEventListener('click', () => { mode = 'erase'});
 drawButton.addEventListener('click', () => {mode = 'draw'});
+rainbowButton.addEventListener('click', () => {mode = 'rainbow'})
 colorPicker.addEventListener('change', choseColor, false);
 clearButton.addEventListener('click', (e) => {clear(pixels)});
 
@@ -47,8 +49,9 @@ pixels.forEach(pixel => pixel.addEventListener('mouseover', draw));
 
 
 // grid size choice
-// rainbow random color choice
 // touch scree function 
+// rainbow random color choice
+
 
 
 function createGrid (numPixels) {
@@ -85,7 +88,23 @@ function erase(pixel) {
   pixel.setAttribute('style', `background-color: white; height: ${size}px; width: ${size}px`);
 }
 
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+
+
 function rainbow(pixel) {
+  let color = getRandomColor();
+  pixel.setAttribute('style', `background-color: ${color}; height: ${size}px; width: ${size}px`);
+
+  
+
 
 }
 
