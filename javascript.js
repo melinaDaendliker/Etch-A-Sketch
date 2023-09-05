@@ -25,17 +25,24 @@ eraser.addEventListener('click', () => { mode = 'erase'; colorButtons(mode);});
 drawButton.addEventListener('click', () => {mode = 'draw'; colorButtons(mode);});
 rainbowButton.addEventListener('click', () => {mode = 'rainbow'; colorButtons(mode);})
 colorPicker.addEventListener('change', choseColor, false);
-clearButton.addEventListener('click', (e) => {clear(pixels)});
+clearButton.addEventListener('click', (e) => {clear(pixels); clearButton.classList.add('pushed');});
+clearButton.addEventListener('transitionend', removeTransition);
 input.addEventListener('change', (e) => {changeGridSize(e);});
 
 // event listener for drawing 
 pixels.forEach(pixel => pixel.addEventListener(`mousemove`, draw ));
 
+
 // functions 
+
+function removeTransition(e) {
+  console.log(e);
+  if (e.propertyName !== 'box-shadow') return;
+  e.target.classList.remove('pushed');
+}
 
 function colorButtons(mode){
   if (mode=='draw') {
-    console.log('test')
     drawButton.classList.add('buttonClicked');
     eraser.classList.remove('buttonClicked');
     rainbowButton.classList.remove('buttonClicked');
