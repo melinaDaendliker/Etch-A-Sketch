@@ -8,18 +8,34 @@
     <title>Document</title>
 </head>
 <body>
-    <div> 
+    <div class="drawing"> 
         <h1>Etch-a-Sketch</h1>
-        <p>Chose a size</p>
-        <input id="size" type="range" min="2" max="100" value="16" />
-        <p>Value: <output id="value"></output></p>
-        <p>Pick a Color</p>
-        <input name="Color Picker" type="color" class="colorPicker"/>
-        <button class="draw">Draw</button>
-        <button class="erase">Erase</button>
-        <button class="rainbow">Rainbow</button>
-        <button class="clear">Clear</button>
-        <div class="drawing-space"></div>
+        
+        <div class="gridSizePicker">
+            <p>Chose a size</p>
+            <input id="size" type="range" min="2" max="100" value="16" />
+            <p>Value: <output id="value"></output></p>
+        </div>
+
+        <div class="color">
+            <p>Pick a Color</p>
+            <input name="Color Picker" type="color" class="colorPicker"/>
+        </div>
+
+        <div class="buttonsCanvas">
+            <div class="buttons">
+                <button class="draw">Draw</button>
+                <button class="erase">Erase</button>
+                <button class="rainbow">Rainbow</button>
+                <button class="clear">Clear</button>
+            </div>
+            <div class="drawing-space">
+            </div>
+            <div>
+
+            </div>
+        </div>
+        
     </div>
 </body>
 </html>

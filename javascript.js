@@ -20,7 +20,7 @@ createGrid(numPixels);
 let pixels = document.querySelectorAll('.pixel');
 
 // event listener for buttons
-eraser.addEventListener('click', () => { mode = 'erase'});
+eraser.addEventListener('click', () => { mode = 'erase';});
 drawButton.addEventListener('click', () => {mode = 'draw'});
 rainbowButton.addEventListener('click', () => {mode = 'rainbow'})
 colorPicker.addEventListener('change', choseColor, false);
@@ -28,9 +28,15 @@ clearButton.addEventListener('click', (e) => {clear(pixels)});
 input.addEventListener('change', (e) => {changeGridSize(e); console.log('test')});
 
 // event listener for drawing 
-pixels.forEach(pixel => pixel.addEventListener(`mousemove`, draw));
+pixels.forEach(pixel => pixel.addEventListener(`mousemove`, draw ));
 
 // functions 
+
+if (mode=='draw') {
+  drawButton.classList.add('buttonClicked');
+} else if (mode='erase') {
+  eraser.classList.add('buttonClicked')
+} 
 
 function changeGridSize (event) {
     value.textContent = event.target.value;
@@ -82,7 +88,7 @@ function draw(e) {
 
 }
 
-function coloring(pixel, col=black) {
+function coloring(pixel, col='black') {
   pixel.setAttribute('style', `background-color: ${col}; height: ${size}px; width: ${size}px`);
 
 }

@@ -3,19 +3,68 @@
     padding: 0;
 }
 body{
-    background-color: gray;
+    background-color: rgb(182, 163, 189);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 25px;
+}
+
+h1{
+    padding: 20px;
+}
+
+#size {
+    accent-color:rgb(83, 62, 136);
+}
+
+
+.drawing{
+    text-align: center;
+}
+
+.gridSizePicker{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 16px;
+}
+
+.color{
+    font-size: 16px;
+    margin: 10px;;
+}
+
+button{
+    height: 50px;
+    width: 100px;
+    font-weight: bold;
+    color: whitesmoke;
+    border: 2px solid whitesmoke;
+    background-color:rgb(182, 163, 189);
+    margin: 15px 5px;
+}
+
+.buttons{
+    display: flex;
+    justify-content: center;
+    align-items: centers;
+}
+
+.drawing-space{
+
 }
 
 .drawing-space{
     display: flex;
-    justify-content: center;
-    align-items: center;
     background-color: white;
     height: 480px;
     width: 480px;
+    margin: 20px auto;
 }
-
 
 .line{
     margin: 0;
+}
+
+.buttonClicked{
+    background-color:rgb(83, 62, 136);
 }
