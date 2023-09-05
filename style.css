@@ -30,7 +30,11 @@ h1{
 
 .color{
     font-size: 16px;
-    margin: 10px;;
+    margin: 10px;
+}
+
+.colorPicker{
+    margin: 10px;
 }
 
 button{
@@ -49,9 +53,7 @@ button{
     align-items: centers;
 }
 
-.drawing-space{
 
-}
 
 .drawing-space{
     display: flex;

@@ -12,7 +12,8 @@ const input = document.querySelector("#size");
 // default values
 let isDrawing = false;
 let color = 'black';
-let mode = 'draw'
+let mode = 'draw';
+colorButtons(mode);
 let numPixels = 16; 
 let size = 480 / numPixels;
 value.textContent = input.value;
@@ -20,23 +21,35 @@ createGrid(numPixels);
 let pixels = document.querySelectorAll('.pixel');
 
 // event listener for buttons
-eraser.addEventListener('click', () => { mode = 'erase';});
-drawButton.addEventListener('click', () => {mode = 'draw'});
-rainbowButton.addEventListener('click', () => {mode = 'rainbow'})
+eraser.addEventListener('click', () => { mode = 'erase'; colorButtons(mode);});
+drawButton.addEventListener('click', () => {mode = 'draw'; colorButtons(mode);});
+rainbowButton.addEventListener('click', () => {mode = 'rainbow'; colorButtons(mode);})
 colorPicker.addEventListener('change', choseColor, false);
 clearButton.addEventListener('click', (e) => {clear(pixels)});
-input.addEventListener('change', (e) => {changeGridSize(e); console.log('test')});
+input.addEventListener('change', (e) => {changeGridSize(e);});
 
 // event listener for drawing 
 pixels.forEach(pixel => pixel.addEventListener(`mousemove`, draw ));
 
 // functions 
 
-if (mode=='draw') {
-  drawButton.classList.add('buttonClicked');
-} else if (mode='erase') {
-  eraser.classList.add('buttonClicked')
-} 
+function colorButtons(mode){
+  if (mode=='draw') {
+    console.log('test')
+    drawButton.classList.add('buttonClicked');
+    eraser.classList.remove('buttonClicked');
+    rainbowButton.classList.remove('buttonClicked');
+  } else if (mode=='erase') {
+    eraser.classList.add('buttonClicked');
+    drawButton.classList.remove('buttonClicked');
+    rainbowButton.classList.remove('buttonClicked');
+  } else if (mode=='rainbow') {
+    rainbowButton.classList.add('buttonClicked');
+    drawButton.classList.remove('buttonClicked');
+    eraser.classList.remove('buttonClicked');
+  }
+}
+
 
 function changeGridSize (event) {
     value.textContent = event.target.value;
